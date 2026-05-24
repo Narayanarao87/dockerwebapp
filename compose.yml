@@ -14,7 +14,7 @@ services:
     
 
   application:
-    iimage: saiyaswanth76/automation:app
+    image: saiyaswanth76/automation:app
     restart: always
     ports:
       - "1111:8080"
