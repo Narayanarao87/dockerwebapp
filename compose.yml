@@ -5,22 +5,40 @@ services:
     image: shaikmustafa/automation:db
     ports:
       - "3306:3306"
-    deploy:
-      replicas: 3
     networks:
       - mynetwork
+    volumes:
+      - dbdata:/yaswanth
+    deploy:
+      replicas: 3
+    
 
   application:
-    image: shaikmustafa/automation:app
+    iimage: shaikmustafa/paytm:movie
+    restart: always
     ports:
       - "1111:8080"
-    deploy:
-      replicas: 3
-    depends_on:
-      - devopsdb
     networks:
       - mynetwork
+    volumes:
+      - appdata:/yash
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: 256M
+        reservations:
+          cpus: "0.25"
+          memory: 64M
+      replicas: 3
+
 
 networks:
   mynetwork:
     driver: overlay
+
+volumes:
+  appdata:
+  dbdata: 
+
+
